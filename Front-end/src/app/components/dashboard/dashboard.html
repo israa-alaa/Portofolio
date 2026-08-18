@@ -1,0 +1,132 @@
+<div id="dashboard" class="dashboard-overlay">
+    <div class="dashboard-box">
+        <div class="dashboard-header">
+            <h2>Admin Dashboard</h2>
+            <a routerLink="/" class="close-btn">Close</a>
+        </div>
+
+        <form (ngSubmit)="saveProfile()" class="dashboard-form">
+            <h3 style="margin-bottom: 20px; color: var(--main-color);">Edit Profile Information</h3>
+            
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" name="name" [(ngModel)]="profile.name">
+            </div>
+
+            <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" name="jobTitle" [(ngModel)]="profile.jobTitle">
+            </div>
+
+            <div class="form-group">
+                <label>Profile Picture</label>
+                <input type="file" (change)="onProfileImageSelected($event)" accept="image/*">
+                @if (profile.image) {
+                    <div style="margin-top: 10px;">
+                        <img [src]="profile.image" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--main-color);">
+                    </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label>Bio</label>
+                <textarea name="bio" [(ngModel)]="profile.bio"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>About Paragraph 1</label>
+                <textarea name="about0" [ngModel]="profile.aboutParagraphs?.[0]" (ngModelChange)="profile.aboutParagraphs = [$event, profile.aboutParagraphs?.[1] || '']"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>About Paragraph 2</label>
+                <textarea name="about1" [ngModel]="profile.aboutParagraphs?.[1]" (ngModelChange)="profile.aboutParagraphs = [profile.aboutParagraphs?.[0] || '', $event]"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Contact Email</label>
+                <input type="email" name="contactEmail" [(ngModel)]="profile.contactEmail">
+            </div>
+
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" name="phone" [(ngModel)]="profile.phone">
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" name="location" [(ngModel)]="profile.location">
+            </div>
+
+            <div class="form-group">
+                <label>CV Download Link</label>
+                <input type="text" name="cvUrl" [(ngModel)]="profile.cvUrl">
+            </div>
+
+            <button type="submit" class="save-btn">Save Profile Changes</button>
+        </form>
+
+        <hr style="border: 1px solid var(--border-color); margin: 30px 0;">
+
+        <div class="dashboard-form">
+            <h3 style="margin-bottom: 20px; color: var(--main-color);">Edit Projects</h3>
+
+            @for (project of projects; track $index; let i = $index) {
+                <div style="margin-bottom: 25px; padding: 15px; border: 1px solid var(--border-color); border-radius: 10px;">
+                    <div class="form-group">
+                        <label>Project Title</label>
+                        <input type="text" [name]="'title_' + i" [(ngModel)]="project.title">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Project Picture</label>
+                        <input type="file" (change)="onProjectImageSelected($event, i)" accept="image/*">
+                        @if (project.image) {
+                            <div style="margin-top: 10px;">
+                                <img [src]="project.image" style="width: 120px; height: 70px; border-radius: 5px; object-fit: cover; border: 1px solid var(--border-color);">
+                            </div>
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <label>Project Description</label>
+                        <textarea [name]="'desc_' + i" [(ngModel)]="project.description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tags</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
+                            @for (tag of project.tags; track $index; let ti = $index) {
+                                <span style="display: inline-flex; align-items: center; gap: 5px; background: rgba(108, 92, 231, 0.2); color: var(--main-color); padding: 4px 10px; border-radius: 15px; font-size: 13px;">
+                                    {{ tag }}
+                                    <button type="button" (click)="removeTag(i, ti)" style="background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 14px; padding: 0;">x</button>
+                                </span>
+                            }
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" placeholder="Add a tag" [(ngModel)]="project.newTag" [name]="'newTag_' + i" (keydown.enter)="addTag(i); $event.preventDefault()" style="flex: 1;">
+                            <button type="button" class="save-btn" style="padding: 8px 16px; font-size: 14px;" (click)="addTag(i)">Add Tag</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Live Link</label>
+                        <input type="text" [name]="'live_' + i" [(ngModel)]="project.liveDemoUrl">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Code Link</label>
+                        <input type="text" [name]="'code_' + i" [(ngModel)]="project.githubUrl">
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" class="save-btn" (click)="saveProject(i)">Save Project #{{ i + 1 }}</button>
+                        <button type="button" class="delete-btn" (click)="deleteProject(i)">Delete Project</button>
+                    </div>
+                </div>
+            }
+
+            <button type="button" class="save-btn" style="width: 100%; margin-top: 10px;" (click)="addProject()">+ Add New Project</button>
+        </div>
+    </div>
+</div>

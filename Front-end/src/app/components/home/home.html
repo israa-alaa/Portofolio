@@ -1,0 +1,19 @@
+<section id="home">
+    <div class="home-container">
+        <div class="home-content">
+            <h3>Hello,</h3>
+            <h1>I'm {{ profile.name || 'Israa Alaa' }}</h1>
+            <h2>{{ profile.jobTitle || 'Front-End Developer' }}</h2>
+            <p>
+                {{ profile.bio || 'I am a passionate Front-end Developer with a strong eye for detail and a focus on creating clean, efficient code.' }}
+            </p>
+            <div class="home-buttons">
+                <a [href]="profile.cvUrl || '#'" target="_blank" class="btn btn-primary">View CV</a>
+                <a href="#connect" class="btn btn-secondary">Contact Me</a>
+            </div>
+        </div>
+        <div class="home-image">
+            <img [src]="profile.image || 'picture.jpg'" [alt]="profile.name || 'Profile Picture'">
+        </div>
+    </div>
+</section>

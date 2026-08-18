@@ -1,0 +1,63 @@
+<section id="connect">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="connect-container">
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <!-- edit: scrolling -->
+                        <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send via Email</button>
+                <p id="formStatus" style="margin-top: 10px; text-align: center; font-weight: 500; color: #6c5ce7;"></p>
+                </form>
+                <p style="margin-top: 15px; font-size: 13px; color: var(--text-muted); text-align: center;">
+                    Or open <a href="https://mail.google.com/mail/?view=cm&fs=1&to=israaelmeniawy@gmail.com&su=Portfolio Contact" target="_blank" style="color: var(--main-color);">Gmail directly</a>
+                </p>
+            </div>
+
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                <p>Feel free to reach out if you have any questions, project ideas, or just want to say hello! I am always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                
+                <div class="info-item">
+                    <span class="info-icon">📧</span>
+                    <div>
+                        <h4>Email</h4>
+                        <p>{{ profile.contactEmail || 'israaelmeniawy@gmail.com' }}</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-icon">📱</span>
+                    <div>
+                        <h4>WhatsApp</h4>
+                        <p>{{ profile.phone || '+20 115 605 7649' }}</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-icon">📍</span>
+                    <div>
+                        <h4>Location</h4>
+                        <p>{{ profile.location || 'Giza, Egypt' }}</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" title="GitHub">🐙</a>
+                    <a href="#" title="LinkedIn">💼</a>
+                    <a href="#" title="WhatsApp">💬</a>
+                    <a href="mailto:israaelmeniawy@gmail.com" title="Email">✉️</a>
+                </div>
+            </div>
+        </div>
+    </section>
